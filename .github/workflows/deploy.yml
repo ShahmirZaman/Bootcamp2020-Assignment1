@@ -1,25 +1,20 @@
-name: Deploy Project Website
+name: Deploy Website
 
-# Set workflow to run on push events to the master branch
-
-on:
-  push:
-    branches:
-    - master
-
-# Running your jobs on different operating systems
+on: [push]
 
 jobs:
   build:
-    name: Deploying to surge
     runs-on: ubuntu-latest
+    name: Deploying to surge
     steps:
       - uses: actions/checkout@v2
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2-beta
         with:
-          node-version: 16
+          node-version: 19
       - name: Install Surge
         run: npm install -g surge
       - name: Run surge
         run: surge ./ Bootcamp2020_Assignment1_Class1.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+
+          
